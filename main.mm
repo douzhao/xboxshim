@@ -26,6 +26,9 @@
     if (!ok)
         return self;
     
+#ifdef BUNDLE_TARGET
+    self.active = YES;
+#else
     socket = [[GCDAsyncUdpSocket alloc] initWithDelegate: self delegateQueue: dispatch_get_main_queue()];
     
     uint16_t port_num = 21337;
@@ -36,7 +39,8 @@
         NSLog(@"Error: Could not begin receiving on port %d", port_num);
     else
         self.active = YES;
-    
+#endif
+
     return self;
 }
 
@@ -95,18 +99,24 @@
 
 - (void) resetCommand
 {
+    NSLog(@"Xbox reset begin");
+
     // turn off all controllers' LEDs:
     
     for (int i = 0; i < 4; i++)
         if (controller_devices[i] != NULL)
             controller_devices[i]->SetLEDPattern(XboxController::LED_FLASH_ONCE);
     
-    if (fetcher != NULL)
-        fetcher->UnregisterFromNotifications();
-
+    if (fetcher != NULL);
+    {
+        delete fetcher; fetcher = NULL;
+    }
+    
     // tell main() to quit:
     
     self.active = NO;
+
+    NSLog(@"Xbox reset end");
 }
 
 - (void) stateCommand
@@ -114,7 +124,55 @@
     [socket sendData: [NSData dataWithBytes: controller_states length: sizeof(controller_states)] toHost: @"loopback" port: 21338 withTimeout: 0.0 tag: 0];
 }
 
+- (bool) getState: (uint8_t*) buffer size: (uint32_t) buffer_size
+{
+    if (buffer_size != sizeof(controller_states))
+        return false;
+    
+    memcpy(buffer, controller_states, sizeof(controller_states));
+    
+    return true;
+}
+
 @end
+
+#ifdef BUNDLE_TARGET
+
+extern "C"
+{
+    bool XboxControllerStart();
+    void XboxControllerReset();
+    bool XboxControllerState(uint8_t *buffer, int32_t buffer_size);
+}
+
+DeviceManager *devices;
+
+bool XboxControllerStart()
+{
+    devices = [DeviceManager new];
+    
+    return devices.active;
+}
+
+void XboxControllerReset()
+{
+    if (!devices)
+        return;
+    
+    [devices resetCommand];
+    
+    devices = nil;
+}
+
+bool XboxControllerState(uint8_t *buffer, int32_t buffer_size)
+{
+    if (!devices || !devices.active)
+        return false;
+    
+    return [devices getState: buffer size: buffer_size];
+}
+
+#else
 
 int main(int argc, const char * argv[]) {
     @autoreleasepool {
@@ -123,11 +181,8 @@ int main(int argc, const char * argv[]) {
 
         while (devices.active && [NSRunLoop.currentRunLoop runMode:NSDefaultRunLoopMode beforeDate: NSDate.distantFuture])
             continue;
-        
-        NSLog(@"Terminating . . .");
-
-        sleep(1); // give time for fetcher to teardown
     }
     
     return 0;
 }
+#endif

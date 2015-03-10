@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		05755BAC1AAF57DE0022901D /* GCDAsyncUdpSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 05BDCCFC1AADEE3C00567469 /* GCDAsyncUdpSocket.m */; };
+		05755BAD1AAF57E10022901D /* xbox_data_fetcher_mac.mm in Sources */ = {isa = PBXBuildFile; fileRef = 05E1E6561AAD634C0093D497 /* xbox_data_fetcher_mac.mm */; };
+		05755BAE1AAF57E40022901D /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = 05E1E6541AAD634C0093D497 /* main.mm */; };
 		05BDCCFD1AADEE3C00567469 /* GCDAsyncUdpSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 05BDCCFC1AADEE3C00567469 /* GCDAsyncUdpSocket.m */; };
 		05E1E64C1AACD8440093D497 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05E1E64B1AACD8440093D497 /* IOKit.framework */; };
 		05E1E6571AAD634C0093D497 /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = 05E1E6541AAD634C0093D497 /* main.mm */; };
@@ -26,8 +29,11 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		05755BA51AAF57D80022901D /* xboxcontroller.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = xboxcontroller.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		05755BA81AAF57D80022901D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		05BDCCFB1AADEE3C00567469 /* GCDAsyncUdpSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDAsyncUdpSocket.h; sourceTree = SOURCE_ROOT; };
 		05BDCCFC1AADEE3C00567469 /* GCDAsyncUdpSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDAsyncUdpSocket.m; sourceTree = SOURCE_ROOT; };
+		05DF94B81AAF521F00A56D38 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		05E1E6411AACC3780093D497 /* xboxshim */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = xboxshim; sourceTree = BUILT_PRODUCTS_DIR; };
 		05E1E64B1AACD8440093D497 /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
 		05E1E6541AAD634C0093D497 /* main.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = main.mm; sourceTree = SOURCE_ROOT; };
@@ -36,6 +42,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		05755BA21AAF57D80022901D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		05E1E63E1AACC3780093D497 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -47,11 +60,45 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		05755BA61AAF57D80022901D /* xboxcontroller */ = {
+			isa = PBXGroup;
+			children = (
+				05755BA71AAF57D80022901D /* Supporting Files */,
+			);
+			path = xboxcontroller;
+			sourceTree = "<group>";
+		};
+		05755BA71AAF57D80022901D /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				05755BA81AAF57D80022901D /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		05DF94B61AAF521F00A56D38 /* controllershim */ = {
+			isa = PBXGroup;
+			children = (
+				05DF94B71AAF521F00A56D38 /* Supporting Files */,
+			);
+			path = controllershim;
+			sourceTree = "<group>";
+		};
+		05DF94B71AAF521F00A56D38 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				05DF94B81AAF521F00A56D38 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		05E1E6381AACC3780093D497 = {
 			isa = PBXGroup;
 			children = (
 				05E1E64B1AACD8440093D497 /* IOKit.framework */,
 				05E1E6431AACC3780093D497 /* xboxshim */,
+				05DF94B61AAF521F00A56D38 /* controllershim */,
+				05755BA61AAF57D80022901D /* xboxcontroller */,
 				05E1E6421AACC3780093D497 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -60,6 +107,7 @@
 			isa = PBXGroup;
 			children = (
 				05E1E6411AACC3780093D497 /* xboxshim */,
+				05755BA51AAF57D80022901D /* xboxcontroller.bundle */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -79,6 +127,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		05755BA41AAF57D80022901D /* xboxcontroller */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 05755BA91AAF57D80022901D /* Build configuration list for PBXNativeTarget "xboxcontroller" */;
+			buildPhases = (
+				05755BA11AAF57D80022901D /* Sources */,
+				05755BA21AAF57D80022901D /* Frameworks */,
+				05755BA31AAF57D80022901D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = xboxcontroller;
+			productName = xboxcontroller;
+			productReference = 05755BA51AAF57D80022901D /* xboxcontroller.bundle */;
+			productType = "com.apple.product-type.bundle";
+		};
 		05E1E6401AACC3780093D497 /* xboxshim */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 05E1E6481AACC3780093D497 /* Build configuration list for PBXNativeTarget "xboxshim" */;
@@ -105,6 +170,9 @@
 				LastUpgradeCheck = 0630;
 				ORGANIZATIONNAME = "Mokuba Digital";
 				TargetAttributes = {
+					05755BA41AAF57D80022901D = {
+						CreatedOnToolsVersion = 6.3;
+					};
 					05E1E6401AACC3780093D497 = {
 						CreatedOnToolsVersion = 6.3;
 					};
@@ -123,11 +191,32 @@
 			projectRoot = "";
 			targets = (
 				05E1E6401AACC3780093D497 /* xboxshim */,
+				05755BA41AAF57D80022901D /* xboxcontroller */,
 			);
 		};
 /* End PBXProject section */
 
+/* Begin PBXResourcesBuildPhase section */
+		05755BA31AAF57D80022901D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
+		05755BA11AAF57D80022901D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				05755BAC1AAF57DE0022901D /* GCDAsyncUdpSocket.m in Sources */,
+				05755BAD1AAF57E10022901D /* xbox_data_fetcher_mac.mm in Sources */,
+				05755BAE1AAF57E40022901D /* main.mm in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		05E1E63D1AACC3780093D497 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -141,6 +230,40 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
+		05755BAA1AAF57D80022901D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = xboxcontroller/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				OTHER_CFLAGS = "-DBUNDLE_TARGET";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				USER_HEADER_SEARCH_PATHS = "Chromium\\ Stuff/**";
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Debug;
+		};
+		05755BAB1AAF57D80022901D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = xboxcontroller/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				OTHER_CFLAGS = "-DBUNDLE_TARGET";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				USER_HEADER_SEARCH_PATHS = "Chromium\\ Stuff/**";
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Release;
+		};
 		05E1E6461AACC3780093D497 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -237,6 +360,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		05755BA91AAF57D80022901D /* Build configuration list for PBXNativeTarget "xboxcontroller" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				05755BAA1AAF57D80022901D /* Debug */,
+				05755BAB1AAF57D80022901D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		05E1E63C1AACC3780093D497 /* Build configuration list for PBXProject "xboxshim" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
